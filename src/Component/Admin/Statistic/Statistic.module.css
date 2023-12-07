@@ -1,0 +1,90 @@
+.title {
+    background-color: white;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 70%;
+    max-width: 250px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.hover {
+    min-width: 1rem;
+    min-height: 1rem;
+}
+
+.fonts {
+    font-size: 1rem;
+}
+
+.hover:hover {
+    cursor: pointer;
+}
+
+.modal_body {
+    max-height: 200px;
+}
+
+.modal {
+    top: 0;
+}
+
+.rows:hover {
+    cursor: pointer;
+}
+
+.rows:active {
+    background-color: rgb(190, 190, 190);
+}
+
+@media only screen and (min-width: 768px) {
+    .hover {
+        min-width: 1.2rem;
+        min-height: 1.2rem;
+    }
+
+    .fonts {
+        font-size: 1.2rem;
+    }
+
+    .modal {
+        max-width: 500px;
+    }
+
+    .dialog {
+        max-width: 500px !important;
+    }
+
+    .modal_body {
+        max-height: 250px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .modal {
+        max-width: 700px;
+    }
+
+    .dialog {
+        max-width: 700px !important;
+    }
+
+    .modal_body {
+        max-height: 300px;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .modal {
+        max-width: 900px;
+    }
+
+    .dialog {
+        max-width: 900px !important;
+    }
+
+    .modal_body {
+        max-height: 400px;
+    }
+}

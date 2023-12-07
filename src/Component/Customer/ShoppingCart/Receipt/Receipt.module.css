@@ -1,0 +1,24 @@
+.title {
+    background-color: white;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 70%;
+    max-width: 250px;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.code {
+    font-size: 1.2rem;
+}
+
+.imgs:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 575px) {
+    .code {
+        font-size: 1rem;
+    }
+}

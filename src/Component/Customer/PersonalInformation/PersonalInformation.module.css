@@ -1,0 +1,51 @@
+.imgContainer {
+    width: 80%;
+    height: 50%;
+    max-width: 250px;
+    min-height: 200px;
+}
+
+.img {
+    background-color: #fafafa;
+    border: 1px solid black;
+    border-radius: 20px;
+    max-width: 400px;
+}
+
+.info {
+    width: 100%;
+}
+
+.update {
+    display: none;
+    font-size: 1rem;
+}
+
+.buttons {
+    display: none;
+}
+
+.table {
+    display: none;
+}
+
+.browse {
+    display: none !important;
+}
+
+@media only screen and (min-width: 768px) {
+    .info {
+        width: 40%;
+    }
+
+    .imgContainer {
+        width: 30%;
+        height: 100%;
+        min-width: 300px;
+        min-height: 200px;
+    }
+
+    .img {
+        max-height: 300px;
+    }
+}
