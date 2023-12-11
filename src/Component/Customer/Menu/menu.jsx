@@ -1,7 +1,8 @@
 import styles from './menu.module.css';
+import axios from 'axios';
+import '../../General/css/scroll.css';
 import { VscAccount } from 'react-icons/vsc';
 import { useEffect, useRef, useState, useCallback } from 'react';
-import axios from 'axios';
 import { domain } from '../../General/tools/domain';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -15,7 +16,6 @@ import {
 import { checkCookie } from '../../General/tools/cookie';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { isRefValid } from '../../General/tools/refChecker';
-import '../../General/css/scroll.css';
 import { deleteCustomerCookie } from '../../General/tools/cookie';
 
 const CustomerMenu = () => {
@@ -185,12 +185,7 @@ const CustomerMenu = () => {
             </div>
 
             <div className={`d-flex align-items-center justify-content-center ${styles.page}`}>
-                <div
-                    style={{
-                        height: '98%',
-                        width: '98%',
-                    }}
-                >
+                <div className={styles.pageContent}>
                     <Outlet />
                 </div>
             </div>

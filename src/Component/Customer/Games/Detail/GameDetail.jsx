@@ -1,17 +1,17 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import styles from './GameDetail.module.css';
-import { useState, useEffect, React, useRef } from 'react';
 import axios from 'axios';
 import FormattedText from '../../../General/tools/formatText';
+import '../../../General/css/carousel.css';
+import '../../../General/css/scroll.css';
+import '../../../General/css/modal.css';
 import { Carousel } from 'react-bootstrap';
+import { useState, useEffect, React, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CiDiscount1 } from 'react-icons/ci';
 import { domain } from '../../../General/tools/domain';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart } from 'react-icons/bs';
-import '../../../General/css/carousel.css';
-import '../../../General/css/scroll.css';
 import { Modal } from 'react-bootstrap';
-import '../../../General/css/modal.css';
 
 export default function CustomerGameDetail() {
     const id = useParams().id;

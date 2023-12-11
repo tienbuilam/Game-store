@@ -4,7 +4,6 @@ import axios from 'axios';
 import '../../../General/css/inputNumber.css';
 import '../../../General/css/modal.css';
 import '../../../General/css/scroll.css';
-
 import { useEffect, useRef, useState } from 'react';
 import { BsFillCartFill } from 'react-icons/bs';
 import { isRefNotValid, isRefValid } from '../../../General/tools/refChecker';
@@ -31,9 +30,7 @@ const Card = (props) => {
         axios
             .post(`http://${domain}/removeFromCart`, formData, { withCredentials: true })
             .then((res) => {
-                console.log(res);
-                props.setDisablePurchase(false);
-                props.setRender(!props.render);
+                props.updateCart();
             })
             .catch((err) => console.log(err));
     };
@@ -263,64 +260,69 @@ const Cart = (props) => {
     const [render, setRender] = useState(false);
     const [discount, setDiscount] = useState(0);
     const [total, setTotal] = useState('0');
+    const [disablePurchase, setDisablePurchase] = useState(false);
+
     const [showPopup, setShowPopup] = useState(false);
     const [showpopup1, setshowpopup1] = useState(false);
     const [showpopup3, setshowpopup3] = useState(false);
     const [showpopup4, setshowpopup4] = useState(false);
     const [showpopup5, setshowpopup5] = useState(false);
 
-    const [disablePurchase, setDisablePurchase] = useState(false);
-
     const popUpcontainer = useRef(null);
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isRefValid(div) && isRefNotValid(target)) target.current = ReactDOM.createRoot(div.current);
-
+    const updateCart = () => {
         axios
             .get(`http://${domain}/getCart`, { withCredentials: true })
             .then((res) => {
                 if (res.data.length) {
-                    const temp = [];
-                    let totalTemp = 0;
-                    for (let i = 0; i < res.data.length; i++) {
-                        if (parseFloat(res.data[i].discount) !== 0)
-                            totalTemp +=
-                                ((parseFloat(res.data[i].price) + 0.01) *
-                                    parseFloat(res.data[i].amount) *
-                                    (100 - parseFloat(res.data[i].discount))) /
-                                    100 -
-                                0.01;
-                        else
-                            totalTemp += (parseFloat(res.data[i].price) + 0.01) * parseFloat(res.data[i].amount) - 0.01;
-                        temp.push(
-                            <Card
-                                setDisablePurchase={setDisablePurchase}
-                                setshowpopup1={setshowpopup1}
-                                setshowpopup3={setshowpopup3}
-                                setshowpopup5={setshowpopup5}
-                                render={render}
-                                setRender={setRender}
-                                Navigate={Navigate}
-                                key={i}
-                                img={res.data[i].picture_1}
-                                id={res.data[i].id}
-                                name={res.data[i].name}
-                                price={res.data[i].price}
-                                discount={res.data[i].discount}
-                                amount={res.data[i].amount}
-                            />,
+                    const temp = res.data.map((item, index) => (
+                        <Card
+                            key={index}
+                            img={item.picture_1}
+                            id={item.id}
+                            name={item.name}
+                            price={item.price}
+                            discount={item.discount}
+                            amount={item.amount}
+                            updateCart={updateCart}
+                            setDisablePurchase={setDisablePurchase}
+                            setshowpopup1={setshowpopup1}
+                            setshowpopup3={setshowpopup3}
+                            setshowpopup5={setshowpopup5}
+                            render={render}
+                            setRender={setRender}
+                            Navigate={navigate}
+                        />
+                    ));
+
+                    let totalTemp = res.data.reduce((total, item) => {
+                        let price = parseFloat(item.price);
+                        let amount = parseFloat(item.amount);
+                        let discount = parseFloat(item.discount);
+                        return (
+                            total +
+                            (discount !== 0
+                                ? ((price + 0.01) * amount * (100 - discount)) / 100 - 0.01
+                                : (price + 0.01) * amount - 0.01)
                         );
-                    }
+                    }, 0);
+
+                    setTotal('$' + ((totalTemp * (100 - discount)) / 100).toFixed(2).toString()); //membership discount
                     if (isRefValid(target)) target.current.render(<>{temp}</>);
-                    setTotal('$' + ((totalTemp * (100 - discount)) / 100).toFixed(2).toString());
                 } else {
                     setDisablePurchase(true);
                     setTotal('$0');
+                    if (isRefValid(target)) target.current.render(<div></div>);
                 }
             })
             .catch((err) => console.log(err));
+    };
+
+    useEffect(() => {
+        if (isRefValid(div) && isRefNotValid(target)) target.current = ReactDOM.createRoot(div.current);
+        updateCart();
         axios
             .get(`http://${domain}/info/discount`, { withCredentials: true })
             .then((res) => {
@@ -329,7 +331,7 @@ const Cart = (props) => {
             .catch((err) => console.log(err));
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [render, Navigate]);
+    }, [render, navigate]);
 
     const buyGames = (method) => {
         setShowPopup(false);
@@ -345,7 +347,7 @@ const Cart = (props) => {
                     setshowpopup4(true);
                 else {
                     props.setIsPaid(true);
-                    Navigate('./receipt');
+                    navigate('./receipt');
                 }
             })
             .catch((err) => console.log(err));
@@ -355,19 +357,19 @@ const Cart = (props) => {
         <div className="w-100 h-100 d-flex flex-column align-items-center" ref={popUpcontainer}>
             <div
                 className={`d-flex align-items-center justify-content-center mx-auto ${styles.title}`}
-                style={{ color: 'red', fontSize: '2rem' }}
+                style={{ color: '#1c60c7', fontSize: '2rem' }}
             >
                 <BsFillCartFill className="mb-0" />
                 &nbsp;
                 <h2 className="mb-0">Your cart</h2>
             </div>
-            <div className="w-100 flex-grow-1 mt-3 overflow-auto" ref={div}></div>
+            <div className="w-100 flex-grow-1 overflow-auto mt-3" ref={div}></div>
             <hr></hr>
             <div className="d-flex justify-content-center align-items-center mb-2 w-100">
                 <input
                     type="text"
                     disabled
-                    className={`me-3 ${styles.total} text-center`}
+                    className={`text-center me-3 ${styles.total}`}
                     style={{ fontSize: '1.5rem' }}
                     value={total}
                 ></input>

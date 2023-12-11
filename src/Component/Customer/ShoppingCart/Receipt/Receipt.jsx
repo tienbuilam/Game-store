@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
 import styles from './Receipt.module.css';
-import { RiBillFill } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { domain } from '../../../General/tools/domain';
-import { useRef } from 'react';
-import { isRefNotValid, isRefValid } from '../../../General/tools/refChecker';
 import ReactDOM from 'react-dom/client';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { domain } from '../../../General/tools/domain';
+import { isRefNotValid, isRefValid } from '../../../General/tools/refChecker';
+import { RiBillFill } from 'react-icons/ri';
 import { CiDiscount1 } from 'react-icons/ci';
 
 const Game = (props) => {
@@ -103,12 +102,12 @@ const Game = (props) => {
 };
 
 const Receipt = (props) => {
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
     const div = useRef(null);
     const target = useRef(null);
 
     useEffect(() => {
-        if (!props.isPaid) Navigate('/home');
+        if (!props.isPaid) navigate('/home');
 
         if (isRefNotValid(target) && isRefValid(div)) target.current = ReactDOM.createRoot(div.current);
 
@@ -120,7 +119,7 @@ const Receipt = (props) => {
                     temp.push(
                         <Game
                             key={i}
-                            Navigate={Navigate}
+                            Navigate={navigate}
                             code={res.data[i].code}
                             id={res.data[i].id}
                             name={res.data[i].name}
@@ -132,13 +131,13 @@ const Receipt = (props) => {
                 if (isRefValid(target)) target.current.render(<>{temp}</>);
             })
             .catch((err) => console.log(err));
-    }, [Navigate, props.isPaid]);
+    }, [navigate, props.isPaid]);
 
     return (
         <div className="w-100 h-100 d-flex flex-column">
             <div
                 className={`d-flex align-items-center justify-content-center mx-auto ${styles.title}`}
-                style={{ color: 'red', fontSize: '2rem' }}
+                style={{ color: '#1c60c7', fontSize: '2rem' }}
             >
                 <RiBillFill className="mb-0" />
                 &nbsp;

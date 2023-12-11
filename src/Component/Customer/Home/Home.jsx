@@ -1,10 +1,11 @@
 import styles from './Home.module.css';
+import ReactDOM from 'react-dom/client';
+import axios from 'axios';
+import blank from '../../General/images/blank.jpg';
 import { TbFlame } from 'react-icons/tb';
 import { domain } from '../../General/tools/domain';
 import { useEffect, useRef, useState } from 'react';
 import { isRefNotValid, isRefValid } from '../../General/tools/refChecker';
-import ReactDOM from 'react-dom/client';
-import axios from 'axios';
 import { CiDiscount1 } from 'react-icons/ci';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart } from 'react-icons/bs';
@@ -102,11 +103,7 @@ const Game = (props) => {
             <img
                 className="card-img-top w-100"
                 alt=""
-                src={
-                    props.img === null
-                        ? 'https://upload.wikimedia.org/wikipedia/commons/7/71/Nothing_whitespace_blank.png'
-                        : `http://${domain}/model/data/games/${props.img}`
-                }
+                src={props.img === null ? blank : `http://${domain}/model/data/games/${props.img}`}
             ></img>
             <div className="card-body d-flex flex-column">
                 <div className="d-flex align-items-center justify-content-center">
@@ -215,10 +212,9 @@ const CustomerHome = () => {
         <div className="w-100 h-100 d-flex flex-column align-items-center" ref={popUpContainer}>
             <div className={`d-flex flex-column align-items-center justify-content-center w-100`}>
                 <div className={`d-flex align-items-center justify-content-center ${styles.title}`}>
-                    <h2 className="d-flex align-items-center" style={{ color: 'red' }}>
+                    <h2 className="d-flex align-items-center" style={{ color: '#1c60c7' }}>
                         <TbFlame />
                         Best sellers
-                        <TbFlame />
                     </h2>
                 </div>
             </div>

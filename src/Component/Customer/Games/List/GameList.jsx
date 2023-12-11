@@ -339,8 +339,8 @@ const CustomerGameList = () => {
         <div className="w-100 h-100 d-flex flex-column align-items-center" ref={popUpContainer}>
             <div className={`d-flex flex-column align-items-center justify-content-center w-100 mb-2`}>
                 <div className={`d-flex align-items-center justify-content-center ${styles.title}`}>
-                    <div style={{ color: 'red', fontSize: '2rem' }} className="d-flex align-items-center">
-                        <FaGamepad className="mb-0" style={{ color: 'red' }} />
+                    <div style={{ color: '#1c60c7', fontSize: '2rem' }} className="d-flex align-items-center">
+                        <FaGamepad className="mb-0" style={{ color: '#1c60c7' }} />
                         &nbsp;
                         <h2 className="mb-0">Games</h2>
                     </div>

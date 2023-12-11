@@ -24,6 +24,7 @@
     z-index: 2000;
     position: fixed;
     background-color: #f8f8f8;
+    transition: width 0.3s;
 }
 
 .tabs {
@@ -34,6 +35,11 @@
 .page {
     height: 100%;
     width: 100%;
+}
+
+.pageContent {
+    height: 98%;
+    width: 98%;
 }
 
 .navToggler {

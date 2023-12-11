@@ -1,10 +1,10 @@
 import styles from './EditGame.module.css';
-import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom/client';
+import { useState, useRef, useEffect } from 'react';
 import { domain } from '../../../General/tools/domain';
 import { useNavigate, useParams } from 'react-router-dom';
 import { isRefNotValid, isRefValid } from '../../../General/tools/refChecker';
-import ReactDOM from 'react-dom/client';
 
 const Category = (props) => {
     const change = (event) => {

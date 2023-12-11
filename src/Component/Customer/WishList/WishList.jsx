@@ -1,9 +1,9 @@
 import styles from './WishList.module.css';
+import ReactDOM from 'react-dom/client';
+import axios from 'axios';
 import { domain } from '../../General/tools/domain';
 import { useEffect, useRef, useState } from 'react';
 import { isRefNotValid, isRefValid } from '../../General/tools/refChecker';
-import ReactDOM from 'react-dom/client';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -282,7 +282,7 @@ const CustomerWishList = () => {
         <div className="w-100 h-100 d-flex flex-column">
             <div className={`d-flex flex-column align-items-center justify-content-center w-100 mb-2`}>
                 <div className={`d-flex align-items-center justify-content-center ${styles.title}`}>
-                    <div className="d-flex align-items-center" style={{ color: 'red', fontSize: '2rem' }}>
+                    <div className="d-flex align-items-center" style={{ color: '#1c60c7', fontSize: '2rem' }}>
                         <BsHeartFill className="mb-0" />
                         &nbsp;
                         <h2 className="mb-0">Wishlist</h2>

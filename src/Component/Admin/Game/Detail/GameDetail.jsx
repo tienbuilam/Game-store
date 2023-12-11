@@ -1,14 +1,14 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import styles from './GameDetail.module.css';
-import { useState, useEffect, useRef, React } from 'react';
 import axios from 'axios';
+import '../../../General/css/carousel.css';
+import '../../../General/css/scroll.css';
+import { useState, useEffect, useRef, React } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BiTrash } from 'react-icons/bi';
 import FormattedText from '../../../General/tools/formatText';
 import { Carousel } from 'react-bootstrap';
 import { CiDiscount1 } from 'react-icons/ci';
 import { domain } from '../../../General/tools/domain';
-import '../../../General/css/carousel.css';
-import '../../../General/css/scroll.css';
 import { isRefValid } from '../../../General/tools/refChecker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
