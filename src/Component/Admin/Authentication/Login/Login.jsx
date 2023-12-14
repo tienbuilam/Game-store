@@ -7,7 +7,7 @@ import { checkCookie } from '../../../General/tools/cookie';
 import { domain } from '../../../General/tools/domain';
 import { isRefValid } from '../../../General/tools/refChecker';
 
-const AdminLogin = () => {
+function AdminLogin() {
     const navigate = useNavigate();
     const resize = useRef(null);
     const [inputs, setInputs] = useState({ username: '', password: '' });
@@ -124,6 +124,6 @@ const AdminLogin = () => {
             </div>
         </>
     );
-};
+}
 
 export default AdminLogin;

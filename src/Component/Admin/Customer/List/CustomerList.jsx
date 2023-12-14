@@ -39,7 +39,7 @@ const Customer = (props) => {
     );
 };
 
-export default function CustomerList() {
+function CustomerList() {
     const [renderTrigger, setRenderTrigger] = useState(true);
 
     const cancel = useRef(null);
@@ -57,7 +57,7 @@ export default function CustomerList() {
     const noCustomerSelected = useRef(null);
     const confirmation = useRef(null);
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = 'Customer list';
@@ -74,7 +74,7 @@ export default function CustomerList() {
                 for (let i = 0; i < res.data.length; i++)
                     temp.push(
                         <Customer
-                            Navigate={Navigate}
+                            Navigate={navigate}
                             refCheckboxes={checkboxes}
                             refNumbers={numbers}
                             key={i}
@@ -89,7 +89,7 @@ export default function CustomerList() {
                 if (isRefValid(target)) target.current.render(<>{temp}</>);
             })
             .catch((error) => console.log(error));
-    }, [renderTrigger, Navigate]);
+    }, [renderTrigger, navigate]);
 
     let timerId;
     const searchCustomer = () => {
@@ -107,7 +107,7 @@ export default function CustomerList() {
                     for (let i = 0; i < res.data.length; i++)
                         temp.push(
                             <Customer
-                                Navigate={Navigate}
+                                Navigate={navigate}
                                 key={i}
                                 i={i}
                                 refNumbers={numbers}
@@ -300,3 +300,5 @@ export default function CustomerList() {
         </div>
     );
 }
+
+export default CustomerList;

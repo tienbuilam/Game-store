@@ -13,7 +13,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart } from 'react-icons/bs';
 import { Modal } from 'react-bootstrap';
 
-export default function CustomerGameDetail() {
+function CustomerGameDetail() {
     const id = useParams().id;
 
     const popUpContainer = useRef(null);
@@ -352,3 +352,5 @@ export default function CustomerGameDetail() {
         </div>
     );
 }
+
+export default CustomerGameDetail;

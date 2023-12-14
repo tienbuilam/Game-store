@@ -1,6 +1,7 @@
 import styles from './WishList.module.css';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
+import blank from '../../General/images/blank.jpg';
 import { domain } from '../../General/tools/domain';
 import { useEffect, useRef, useState } from 'react';
 import { isRefNotValid, isRefValid } from '../../General/tools/refChecker';
@@ -76,11 +77,7 @@ const Game = (props) => {
                     className="card-img-top"
                     style={{ height: '60%' }}
                     alt=""
-                    src={
-                        props.img === null
-                            ? 'https://upload.wikimedia.org/wikipedia/commons/7/71/Nothing_whitespace_blank.png'
-                            : `http://${domain}/model/data/games/${props.img}`
-                    }
+                    src={props.img === null ? blank : `http://${domain}/model/data/games/${props.img}`}
                 ></img>
                 <div className="card-body d-flex flex-column">
                     <div className="d-flex align-items-center justify-content-center">

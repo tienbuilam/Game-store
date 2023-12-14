@@ -97,7 +97,7 @@ const Game = (props) => {
     );
 };
 
-export default function GameList() {
+function GameList() {
     const [renderTrigger, setRenderTrigger] = useState(true);
     const [mode, setMode] = useState(null);
 
@@ -121,7 +121,7 @@ export default function GameList() {
     const deactivate_confirmation = useRef(null);
     const activate_confirmation = useRef(null);
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = 'Game list';
@@ -139,7 +139,7 @@ export default function GameList() {
                     temp.push(
                         <Game
                             status={res.data[i].status}
-                            Navigate={Navigate}
+                            Navigate={navigate}
                             refCheckboxes={checkboxes}
                             refNumbers={numbers}
                             key={i}
@@ -154,7 +154,7 @@ export default function GameList() {
                 if (isRefValid(target)) target.current.render(<>{temp}</>);
             })
             .catch((error) => console.log(error));
-    }, [renderTrigger, Navigate]);
+    }, [renderTrigger, navigate]);
 
     let timerId;
     const searchGame = () => {
@@ -172,7 +172,7 @@ export default function GameList() {
                     for (let i = 0; i < res.data.length; i++)
                         temp.push(
                             <Game
-                                Navigate={Navigate}
+                                Navigate={navigate}
                                 refCheckboxes={checkboxes}
                                 refNumbers={numbers}
                                 key={i}
@@ -510,7 +510,7 @@ export default function GameList() {
                     <button
                         className={`btn btn-primary mx-md-3 mx-1`}
                         onClick={() => {
-                            Navigate('./add');
+                            navigate('./add');
                         }}
                         ref={addButton}
                     >
@@ -536,3 +536,5 @@ export default function GameList() {
         </div>
     );
 }
+
+export default GameList;

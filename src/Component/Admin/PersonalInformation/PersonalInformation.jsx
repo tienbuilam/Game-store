@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 import { domain } from '../../General/tools/domain';
 import { isRefValid } from '../../General/tools/refChecker';
 
-export default function AdminPersonalInfo() {
+function AdminPersonalInfo() {
     const id = useParams().id;
     const [admin, setadmin] = useState({
         name: 'N/A',
@@ -240,7 +240,7 @@ export default function AdminPersonalInfo() {
                         </label>
                     </div>
                     <div
-                        className={`d-flex flex-column justify-content-center align-items-center ${styles.info} mt-2 mt-md-0`}
+                        className={`d-flex flex-column justify-content-center align-items-center mt-2 mt-md-0 ${styles.info}`}
                     >
                         <div className="w-100 text-center" style={{ marginBottom: '16px' }}>
                             Name: &nbsp;
@@ -426,3 +426,5 @@ export default function AdminPersonalInfo() {
         </div>
     );
 }
+
+export default AdminPersonalInfo;

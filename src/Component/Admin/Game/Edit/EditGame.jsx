@@ -59,7 +59,7 @@ const Line = (props) => {
     return <div className="row mx-auto" ref={target} style={{ width: '95%' }}></div>;
 };
 
-const EditGame = () => {
+function EditGame() {
     document.title = `Edit game`;
 
     const id = useParams().id;
@@ -106,7 +106,7 @@ const EditGame = () => {
     const [render, setRender] = useState(false);
     const breakpoint = useRef(0);
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const formData = new FormData();
@@ -351,7 +351,7 @@ const EditGame = () => {
                 console.log(error);
             });
 
-        Navigate(-1);
+        navigate(-1);
     };
 
     const stopChoosing = () => {
@@ -617,7 +617,7 @@ const EditGame = () => {
                         type="button"
                         className={` me-3 btn btn-danger`}
                         onClick={() => {
-                            Navigate(-1);
+                            navigate(-1);
                         }}
                     >
                         Cancel
@@ -629,6 +629,6 @@ const EditGame = () => {
             </div>
         </div>
     );
-};
+}
 
 export default EditGame;

@@ -13,7 +13,7 @@ import { isRefValid } from '../../../General/tools/refChecker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
-export default function AdminGameDetail() {
+function AdminGameDetail() {
     const id = useParams().id;
     const [game, SetGame] = useState({
         name: 'N/A',
@@ -34,7 +34,7 @@ export default function AdminGameDetail() {
     const [category, setCategory] = useState('N/A');
     const [render, setRender] = useState(false);
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     const delete_pop_up = useRef(null);
     const deactivate_pop_up = useRef(null);
@@ -108,7 +108,7 @@ export default function AdminGameDetail() {
             .post(`http://${domain}/admin/game/delete`, formData)
             .then((res) => {
                 console.log(res);
-                Navigate(-1);
+                navigate(-1);
             })
             .catch((error) => console.log(error));
     };
@@ -167,7 +167,7 @@ export default function AdminGameDetail() {
                     <button
                         className={`me-2 btn btn-sm btn-primary`}
                         onClick={() => {
-                            Navigate('./edit');
+                            navigate('./edit');
                         }}
                     >
                         Edit
@@ -175,7 +175,7 @@ export default function AdminGameDetail() {
                     <button
                         className={`ms-2 btn btn-sm btn-secondary`}
                         onClick={() => {
-                            Navigate(-1);
+                            navigate(-1);
                         }}
                     >
                         Back
@@ -375,3 +375,5 @@ export default function AdminGameDetail() {
         </div>
     );
 }
+
+export default AdminGameDetail;

@@ -17,7 +17,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { isRefValid } from '../../General/tools/refChecker';
 import '../../General/css/scroll.css';
 
-const AdminMenu = () => {
+function AdminMenu() {
     const navigate = useNavigate();
     const navbar = useRef(null);
     const tabs = useRef(null);
@@ -182,6 +182,6 @@ const AdminMenu = () => {
             </div>
         </div>
     );
-};
+}
 
 export default AdminMenu;

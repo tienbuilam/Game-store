@@ -53,7 +53,7 @@ const Line = (props) => {
     return <div className="row mx-auto" ref={target} style={{ width: '95%' }}></div>;
 };
 
-const AddGame = () => {
+function AddGame() {
     document.title = 'Add a game';
 
     const [pic1, setPic1] = useState(null);
@@ -92,7 +92,7 @@ const AddGame = () => {
         }
     };
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     const loadPicture = (e, number) => {
         e.preventDefault();
@@ -178,7 +178,7 @@ const AddGame = () => {
                 .catch((error) => {
                     console.log(error);
                 });
-            Navigate(-1);
+            navigate(-1);
         }
     };
 
@@ -551,7 +551,7 @@ const AddGame = () => {
                         type="button"
                         className={`btn btn-danger me-3`}
                         onClick={() => {
-                            Navigate(-1);
+                            navigate(-1);
                         }}
                     >
                         Cancel
@@ -563,6 +563,6 @@ const AddGame = () => {
             </div>
         </div>
     );
-};
+}
 
 export default AddGame;

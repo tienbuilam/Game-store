@@ -29,7 +29,7 @@ function generateUniqueRGBAColors(n) {
 
 const colors = generateUniqueRGBAColors(200);
 
-const DrawOverall = () => {
+function DrawOverall() {
     const [choice, setChoice] = useState(0);
     const [data, setData] = useState([]);
 
@@ -123,7 +123,7 @@ const DrawOverall = () => {
             </ResponsiveContainer>
         </div>
     );
-};
+}
 
 const Category = (props) => {
     return (

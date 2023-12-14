@@ -65,7 +65,7 @@ const Game = (props) => {
     );
 };
 
-const AdminHome = () => {
+function AdminHome() {
     document.title = 'Home';
 
     const day = useRef(null);
@@ -78,7 +78,7 @@ const AdminHome = () => {
     const targetMonth = useRef(null);
     const targetYear = useRef(null);
 
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isRefNotValid(targetDay) && isRefValid(day)) targetDay.current = ReactDOM.createRoot(day.current);
@@ -93,7 +93,7 @@ const AdminHome = () => {
                 for (let i = 0; i < res.data.length; i++)
                     temp.push(
                         <Game
-                            Navigate={Navigate}
+                            Navigate={navigate}
                             i={i + 1}
                             id={res.data[i].id}
                             solds={res.data[i].solds}
@@ -114,7 +114,7 @@ const AdminHome = () => {
                 for (let i = 0; i < res.data.length; i++)
                     temp.push(
                         <Game
-                            Navigate={Navigate}
+                            Navigate={navigate}
                             i={i + 1}
                             id={res.data[i].id}
                             solds={res.data[i].solds}
@@ -135,7 +135,7 @@ const AdminHome = () => {
                 for (let i = 0; i < res.data.length; i++)
                     temp.push(
                         <Game
-                            Navigate={Navigate}
+                            Navigate={navigate}
                             i={i + 1}
                             id={res.data[i].id}
                             solds={res.data[i].solds}
@@ -156,7 +156,7 @@ const AdminHome = () => {
                 for (let i = 0; i < res.data.length; i++)
                     temp.push(
                         <Game
-                            Navigate={Navigate}
+                            Navigate={navigate}
                             i={i + 1}
                             id={res.data[i].id}
                             solds={res.data[i].solds}
@@ -169,7 +169,7 @@ const AdminHome = () => {
                 if (isRefValid(targetYear)) targetYear.current.render(<>{temp}</>);
             })
             .catch((err) => console.log(err));
-    }, [Navigate]);
+    }, [navigate]);
 
     return (
         <div className="w-100 h-100 d-flex flex-column">
@@ -296,6 +296,6 @@ const AdminHome = () => {
             </div>
         </div>
     );
-};
+}
 
 export default AdminHome;

@@ -250,15 +250,15 @@ function CustomerPersonalInfo() {
             ref={formRef}
         >
             <div className="w-100 h-100 d-flex align-items-center">
-                <div className={`flex-grow-1 w-100 mt-3 overflow-auto mb-3`}>
+                <div className={`flex-grow-1 w-100 overflow-auto mb-3 mt-3`}>
                     <div
-                        className={`d-flex flex-column flex-md-row align-items-center justify-content-md-around justify-content-xxl-center align-items-md-start w-100 my-auto`}
+                        className={`d-flex flex-column flex-md-row align-items-center justify-content-md-around justify-content-xxl-center align-items-md-start my-auto`}
                     >
                         <div className={`${styles.imgContainer} ms-md-5 d-flex flex-column`}>
-                            <img className={`h-100 ${styles.img}`} ref={imageRef} alt="avatar" />
+                            <img className={`${styles.img}`} ref={imageRef} alt="avatar" />
 
                             <label
-                                className={`btn btn-sm btn-light border border-dark mt-3 mx-auto ${styles.browse} mb-3`}
+                                className={`btn btn-sm btn-light border border-dark mb-3 mt-3 mx-auto ${styles.browse}`}
                                 ref={image_input}
                             >
                                 <input
@@ -278,7 +278,7 @@ function CustomerPersonalInfo() {
                             </button>
                         </div>
                         <div
-                            className={`d-flex flex-column justify-content-center align-items-center ${styles.info} mt-2 mt-md-0 me-xxl-5`}
+                            className={`d-flex flex-column justify-content-center align-items-center mt-2 mt-md-0 me-xxl-5 ${styles.info}`}
                         >
                             <div className="text-center" style={{ marginBottom: '16px' }}>
                                 Name: &nbsp;

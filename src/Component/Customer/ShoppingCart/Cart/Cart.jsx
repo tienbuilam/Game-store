@@ -259,7 +259,7 @@ const Cart = (props) => {
 
     const [render, setRender] = useState(false);
     const [discount, setDiscount] = useState(0);
-    const [total, setTotal] = useState('0');
+    const [total, setTotal] = useState(0);
     const [disablePurchase, setDisablePurchase] = useState(false);
 
     const [showPopup, setShowPopup] = useState(false);
@@ -271,6 +271,20 @@ const Cart = (props) => {
     const popUpcontainer = useRef(null);
 
     const navigate = useNavigate();
+
+    const calculateTotal = (cartItems) => {
+        let newTotal = 0;
+        cartItems.forEach((item) => {
+            let price = parseFloat(item.price);
+            let amount = parseFloat(item.amount);
+            let discount = parseFloat(item.discount);
+            newTotal +=
+                discount !== 0
+                    ? ((price + 0.01) * amount * (100 - discount)) / 100 - 0.01
+                    : (price + 0.01) * amount - 0.01;
+        });
+        return '$' + ((newTotal * (100 - discount)) / 100).toFixed(2).toString(); // Adjust for membership discount
+    };
 
     const updateCart = () => {
         axios
@@ -297,19 +311,7 @@ const Cart = (props) => {
                         />
                     ));
 
-                    let totalTemp = res.data.reduce((total, item) => {
-                        let price = parseFloat(item.price);
-                        let amount = parseFloat(item.amount);
-                        let discount = parseFloat(item.discount);
-                        return (
-                            total +
-                            (discount !== 0
-                                ? ((price + 0.01) * amount * (100 - discount)) / 100 - 0.01
-                                : (price + 0.01) * amount - 0.01)
-                        );
-                    }, 0);
-
-                    setTotal('$' + ((totalTemp * (100 - discount)) / 100).toFixed(2).toString()); //membership discount
+                    setTotal(calculateTotal(res.data)); //membership discount
                     if (isRefValid(target)) target.current.render(<>{temp}</>);
                 } else {
                     setDisablePurchase(true);

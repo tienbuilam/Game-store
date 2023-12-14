@@ -1,26 +1,27 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import styles from './CustomerDetail.module.css';
 import { useState, useEffect, useRef } from 'react';
+import styles from './CustomerDetail.module.css';
 import axios from 'axios';
-import { BiTrash } from 'react-icons/bi';
 import ReactDOM from 'react-dom/client';
+import '../../../General/css/scroll.css';
+import person from '../../../General/images/person.jpg';
+import { useNavigate, useParams } from 'react-router-dom';
+import { BiTrash } from 'react-icons/bi';
 import { domain } from '../../../General/tools/domain';
 import { isRefValid, isRefNotValid } from '../../../General/tools/refChecker';
-import '../../../General/css/scroll.css';
 
-const History = (props) => {
+const History = ({ name, code, date, price, method }) => {
     return (
         <tr>
-            <td className="col-3 text-center">{props.name}</td>
-            <td className="col-3 text-center">{props.code}</td>
-            <td className="col-2 text-center">{props.date}</td>
-            <td className="col-2 text-center">${props.price}</td>
-            <td className="col-2 text-center">{props.method}</td>
+            <td className="col-3 text-center">{name}</td>
+            <td className="col-3 text-center">{code}</td>
+            <td className="col-2 text-center">{date}</td>
+            <td className="col-2 text-center">${price}</td>
+            <td className="col-2 text-center">{method}</td>
         </tr>
     );
 };
 
-export default function CustomerDetail() {
+function CustomerDetail() {
     const id = useParams().id;
     const [customer, setCustomer] = useState({
         name: 'N/A',
@@ -33,7 +34,7 @@ export default function CustomerDetail() {
         dob: 'N/A',
     });
     const [renderTrigger, setRenderTrigger] = useState(true);
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
 
     const select_menu = useRef(null);
     const rank = useRef(null);
@@ -81,10 +82,7 @@ export default function CustomerDetail() {
                 spending: res.data.total_spending,
                 rank: res.data.membership_rank,
                 discount: res.data.membership_discount,
-                image:
-                    res.data.image === null
-                        ? 'https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA='
-                        : `http://${domain}/model/data/customers/${res.data.image}`,
+                image: res.data.image === null ? person : `http://${domain}/model/data/customers/${res.data.image}`,
                 dob: res.data.dob === null ? 'N/A' : res.data.dob,
             });
             if (isRefValid(select_menu)) select_menu.current.value = res.data.membership_rank;
@@ -243,7 +241,7 @@ export default function CustomerDetail() {
             .post(`http://${domain}/admin/customer/delete`, formData)
             .then((res) => {
                 console.log(res);
-                Navigate(-1);
+                navigate(-1);
             })
             .catch((error) => console.log(error));
     };
@@ -260,108 +258,121 @@ export default function CustomerDetail() {
                 <button
                     className={`ms-md-auto me-md-3 me-auto ms-3 btn btn-secondary btn-sm`}
                     onClick={() => {
-                        Navigate(-1);
+                        navigate(-1);
                     }}
                 >
                     Back
                 </button>
             </div>
-            <div className={`flex-grow-1 w-100 mt-3 overflow-auto hideBrowserScrollbar mb-3`} ref={bigDiv}>
-                <div
-                    className={`d-flex flex-column flex-md-row align-items-center justify-content-md-between align-items-md-start w-100`}
-                    ref={div1Height}
-                >
-                    <img className={`${styles.img} ms-md-5`} src={customer.image} alt="avatar" />
+            <div className="w-100 h-100 d-flex align-items-center">
+                <div className={`flex-grow-1 w-100 overflow-auto hideBrowserScrollbar mt-3 mb-3`} ref={bigDiv}>
                     <div
-                        className={`d-flex flex-column justify-content-center align-items-center ${styles.info} mt-2 mt-md-0 me-xxl-5`}
+                        className={`d-flex flex-column flex-md-row align-items-center justify-content-md-around justify-content-xxl-center align-items-md-start my-auto`}
+                        ref={div1Height}
                     >
-                        <div style={{ marginBottom: '16px' }}>Name: &nbsp;{customer.name}</div>
-                        <div style={{ marginBottom: '16px' }}>Date of birth: &nbsp;{customer.dob}</div>
-                        <div className="text-center" style={{ marginBottom: '16px' }}>
-                            Email: &nbsp;
-                            <span ref={customer_email}>{customer.email}</span>
-                            <input type="text" className={`${styles.update} `} ref={customer_email_input}></input>
-                        </div>
-                        <div className="text-center" style={{ marginBottom: '16px' }}>
-                            Phone number: &nbsp;
-                            <span ref={customer_phone}>{customer.phone}</span>
-                            <input
-                                type="text"
-                                className={`${styles.update} `}
-                                ref={customer_phone_input}
-                                maxLength="10"
-                            ></input>
-                        </div>
-                        <div className="text-center" style={{ marginBottom: '16px' }}>
-                            Total spending: &nbsp;${customer.spending}
-                        </div>
-                        <div className="text-center" style={{ marginBottom: '16px' }}>
-                            Membership rank: &nbsp;
-                            <span ref={rank}>{customer.rank}</span>
-                            <select className={`${styles.update}`} onChange={selectHandler} ref={select_menu}>
-                                <option value="None">None</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Diamond">Diamond</option>
-                                <option value="Special">Special</option>
-                            </select>
-                        </div>
-                        <div className="text-center" style={{ marginBottom: '16px' }}>
-                            Membership discount: &nbsp;
-                            <span ref={discount}>{customer.discount}%</span>
-                            <input type="number" className={`${styles.update}`} disabled ref={discount_input}></input>
-                        </div>
-                        <button className={`btn btn-sm btn-primary`} onClick={changeInfo} ref={edit}>
-                            Edit
-                        </button>
-                        <div
-                            className={`${styles.buttons} w-100 align-items-center justify-content-center`}
-                            ref={update}
-                        >
-                            <button className={`btn btn-sm btn-danger`} onClick={cancelUpdate}>
-                                Cancel
-                            </button>
+                        <div className={`${styles.imgContainer} ms-md-5 d-flex flex-column`}>
+                            <img className={`${styles.img}`} src={customer.image} alt="avatar" />
                             <button
-                                className={`btn btn-sm btn-primary mx-3`}
-                                onClick={() => {
-                                    if (isRefValid(update_pop_up)) update_pop_up.current.style.display = 'flex';
-                                }}
+                                className={`btn btn-sm btn-primary align-self-center mt-3`}
+                                onClick={getHistory}
+                                ref={buttonHeight}
                             >
-                                Confirm
+                                Get history purchases
                             </button>
+                        </div>
+                        <div
+                            className={`d-flex flex-column justify-content-center align-items-center mt-2 mt-md-0 me-xxl-5 ${styles.info}`}
+                        >
+                            <div style={{ marginBottom: '16px' }}>Name: &nbsp;{customer.name}</div>
+                            <div style={{ marginBottom: '16px' }}>Date of birth: &nbsp;{customer.dob}</div>
+                            <div className="text-center" style={{ marginBottom: '16px' }}>
+                                Email: &nbsp;
+                                <span ref={customer_email}>{customer.email}</span>
+                                <input type="text" className={`${styles.update} `} ref={customer_email_input}></input>
+                            </div>
+                            <div className="text-center" style={{ marginBottom: '16px' }}>
+                                Phone number: &nbsp;
+                                <span ref={customer_phone}>{customer.phone}</span>
+                                <input
+                                    type="text"
+                                    className={`${styles.update} `}
+                                    ref={customer_phone_input}
+                                    maxLength="10"
+                                ></input>
+                            </div>
+                            <div className="text-center" style={{ marginBottom: '16px' }}>
+                                Total spending: &nbsp;${customer.spending}
+                            </div>
+                            <div className="text-center" style={{ marginBottom: '16px' }}>
+                                Membership rank: &nbsp;
+                                <span ref={rank}>{customer.rank}</span>
+                                <select className={`${styles.update}`} onChange={selectHandler} ref={select_menu}>
+                                    <option value="None">None</option>
+                                    <option value="Silver">Silver</option>
+                                    <option value="Gold">Gold</option>
+                                    <option value="Diamond">Diamond</option>
+                                    <option value="Special">Special</option>
+                                </select>
+                            </div>
+                            <div className="text-center" style={{ marginBottom: '16px' }}>
+                                Membership discount: &nbsp;
+                                <span ref={discount}>{customer.discount}%</span>
+                                <input
+                                    type="number"
+                                    className={`${styles.update}`}
+                                    disabled
+                                    ref={discount_input}
+                                ></input>
+                            </div>
+                            <button className={`btn btn-sm btn-primary`} onClick={changeInfo} ref={edit}>
+                                Edit
+                            </button>
+                            <div
+                                className={`${styles.buttons} w-100 align-items-center justify-content-center`}
+                                ref={update}
+                            >
+                                <button className={`btn btn-sm btn-danger`} onClick={cancelUpdate}>
+                                    Cancel
+                                </button>
+                                <button
+                                    className={`btn btn-sm btn-primary mx-3`}
+                                    onClick={() => {
+                                        if (isRefValid(update_pop_up)) update_pop_up.current.style.display = 'flex';
+                                    }}
+                                >
+                                    Confirm
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button className={`btn btn-sm btn-primary ms-md-5 ms-4 mt-2`} onClick={getHistory} ref={buttonHeight}>
-                    Get history purchases
-                </button>
-                <div
-                    className={`w-100 mt-2 overflow-auto ${styles.table}`}
-                    ref={div2Height}
-                    style={{ minHeight: '250px' }}
-                >
-                    <table className={`table table-hover mx-auto mb-0 w-100`}>
-                        <thead style={{ position: 'sticky', top: '0', backgroundColor: '#BFBFBF' }}>
-                            <tr>
-                                <th scope="col" className={`col-3 text-center`}>
-                                    Game name
-                                </th>
-                                <th scope="col" className={`col-3 text-center`}>
-                                    Code
-                                </th>
-                                <th scope="col" className={`col-2 text-center`}>
-                                    Date
-                                </th>
-                                <th scope="col" className={`col-2 text-center`}>
-                                    Price
-                                </th>
-                                <th scope="col" className={`col-2 text-center`}>
-                                    Method
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody ref={history}></tbody>
-                    </table>
+                    <div
+                        className={`w-100 mt-2 overflow-auto ${styles.table}`}
+                        ref={div2Height}
+                        style={{ minHeight: '250px' }}
+                    >
+                        <table className={`table table-hover mx-auto mb-0 w-100`}>
+                            <thead style={{ position: 'sticky', top: '0', backgroundColor: '#BFBFBF' }}>
+                                <tr>
+                                    <th scope="col" className={`col-3 text-center`}>
+                                        Game name
+                                    </th>
+                                    <th scope="col" className={`col-3 text-center`}>
+                                        Code
+                                    </th>
+                                    <th scope="col" className={`col-2 text-center`}>
+                                        Date
+                                    </th>
+                                    <th scope="col" className={`col-2 text-center`}>
+                                        Price
+                                    </th>
+                                    <th scope="col" className={`col-2 text-center`}>
+                                        Method
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody ref={history}></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div
@@ -473,3 +484,5 @@ export default function CustomerDetail() {
         </div>
     );
 }
+
+export default CustomerDetail;
