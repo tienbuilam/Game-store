@@ -90,7 +90,7 @@ const Card = (props) => {
                 .then((res) => {
                     if (res.data.OutDeleted === '1') props.setshowpopup3(true);
                     else {
-                        if (res.data.OutStatus === '0') props.setshowpopup1(true);
+                        if (res.data.OutStatus === '0') props.setshowpopup2(true);
                         else {
                             if (res.data.OutNotEnough === '1') props.setshowpopup5(true);
                             else props.setRender(!props.render);
@@ -110,7 +110,7 @@ const Card = (props) => {
                     .then((res) => {
                         if (res.data.OutDeleted === '1') props.setshowpopup3(true);
                         else {
-                            if (res.data.OutStatus === '0') props.setshowpopup1(true);
+                            if (res.data.OutStatus === '0') props.setshowpopup2(true);
                             else {
                                 if (res.data.OutNotEnough === '1') {
                                     props.setshowpopup5(true);
@@ -142,7 +142,7 @@ const Card = (props) => {
                     if (res.data.OutDeleted === '1') props.setshowpopup3(true);
                     else {
                         if (res.data.OutStatus === '1') setRender(!render);
-                        else props.setshowpopup1(true);
+                        else props.setshowpopup2(true);
                     }
                 })
                 .catch((err) => console.log(err));
@@ -263,7 +263,7 @@ const Cart = (props) => {
     const [disablePurchase, setDisablePurchase] = useState(false);
 
     const [showPopup, setShowPopup] = useState(false);
-    const [showpopup1, setshowpopup1] = useState(false);
+    const [showpopup2, setshowpopup2] = useState(false);
     const [showpopup3, setshowpopup3] = useState(false);
     const [showpopup4, setshowpopup4] = useState(false);
     const [showpopup5, setshowpopup5] = useState(false);
@@ -302,7 +302,7 @@ const Cart = (props) => {
                             amount={item.amount}
                             updateCart={updateCart}
                             setDisablePurchase={setDisablePurchase}
-                            setshowpopup1={setshowpopup1}
+                            setshowpopup2={setshowpopup2}
                             setshowpopup3={setshowpopup3}
                             setshowpopup5={setshowpopup5}
                             render={render}
@@ -431,7 +431,7 @@ const Cart = (props) => {
                     </button>
                 </Modal.Footer>
             </Modal>
-            <Modal show={showpopup1} className={`reAdjustModel`} container={popUpcontainer.current}>
+            <Modal show={showpopup2} className={`reAdjustModel`} container={popUpcontainer.current}>
                 <Modal.Header className="border border-0"></Modal.Header>
                 <Modal.Body className="border border-0 d-flex justify-content-center">
                     <h4 className="text-center">This game has been suspended!</h4>
@@ -440,7 +440,7 @@ const Cart = (props) => {
                     <button
                         className="btn btn-primary ms-2 ms-md-4"
                         onClick={() => {
-                            setshowpopup1(false);
+                            setshowpopup2(false);
                             setRender(!render);
                         }}
                     >
@@ -448,22 +448,7 @@ const Cart = (props) => {
                     </button>
                 </Modal.Footer>
             </Modal>
-            <Modal show={showpopup5} className={`reAdjustModel`} container={popUpcontainer.current}>
-                <Modal.Header className="border border-0"></Modal.Header>
-                <Modal.Body className="border border-0 d-flex justify-content-center">
-                    <h4 className="text-center">The store doesn't have enough copies for your demand!</h4>
-                </Modal.Body>
-                <Modal.Footer className="justify-content-center border border-0">
-                    <button
-                        className="btn btn-primary ms-2 ms-md-4"
-                        onClick={() => {
-                            setshowpopup5(false);
-                        }}
-                    >
-                        Okay
-                    </button>
-                </Modal.Footer>
-            </Modal>
+
             <Modal show={showpopup3} className={`reAdjustModel`} container={popUpcontainer.current}>
                 <Modal.Header className="border border-0"></Modal.Header>
                 <Modal.Body className="border border-0 d-flex justify-content-center">
@@ -481,6 +466,7 @@ const Cart = (props) => {
                     </button>
                 </Modal.Footer>
             </Modal>
+
             <Modal show={showpopup4} className={`reAdjustModel`} container={popUpcontainer.current}>
                 <Modal.Header className="border border-0"></Modal.Header>
                 <Modal.Body className="border border-0 d-flex justify-content-center">
@@ -492,6 +478,23 @@ const Cart = (props) => {
                         onClick={() => {
                             setshowpopup4(false);
                             setRender(!render);
+                        }}
+                    >
+                        Okay
+                    </button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showpopup5} className={`reAdjustModel`} container={popUpcontainer.current}>
+                <Modal.Header className="border border-0"></Modal.Header>
+                <Modal.Body className="border border-0 d-flex justify-content-center">
+                    <h4 className="text-center">The store doesn't have enough copies for your demand!</h4>
+                </Modal.Body>
+                <Modal.Footer className="justify-content-center border border-0">
+                    <button
+                        className="btn btn-primary ms-2 ms-md-4"
+                        onClick={() => {
+                            setshowpopup5(false);
                         }}
                     >
                         Okay
