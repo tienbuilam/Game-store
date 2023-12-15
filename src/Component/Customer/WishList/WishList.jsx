@@ -42,7 +42,6 @@ const Game = (props) => {
         axios
             .post(`http://${domain}/removeFromWishlist`, formData, { withCredentials: true })
             .then((res) => {
-                console.log(res);
                 props.setRender(!props.render);
             })
             .catch((err) => console.log(err));
@@ -55,7 +54,6 @@ const Game = (props) => {
             axios
                 .post(`http://${domain}/removeFromCart`, formData, { withCredentials: true })
                 .then((res) => {
-                    console.log(res);
                     setLocalRender(!localRender);
                 })
                 .catch((err) => console.log(err));
@@ -63,7 +61,6 @@ const Game = (props) => {
             axios
                 .post(`http://${domain}/addToCart`, formData, { withCredentials: true })
                 .then((res) => {
-                    console.log(res);
                     setIsInCart(res.data);
                 })
                 .catch((err) => console.log(err));

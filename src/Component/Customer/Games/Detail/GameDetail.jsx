@@ -119,7 +119,6 @@ function CustomerGameDetail() {
             axios
                 .post(`http://${domain}/removeFromWishlist`, formData, { withCredentials: true })
                 .then((res) => {
-                    console.log(res);
                     setRender(!render);
                 })
                 .catch((err) => console.log(err));
@@ -145,7 +144,6 @@ function CustomerGameDetail() {
             axios
                 .post(`http://${domain}/removeFromCart`, formData, { withCredentials: true })
                 .then((res) => {
-                    console.log(res);
                     setRender(!render);
                 })
                 .catch((err) => console.log(err));

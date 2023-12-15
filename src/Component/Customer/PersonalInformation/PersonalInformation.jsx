@@ -212,7 +212,6 @@ function CustomerPersonalInfo() {
                 axios
                     .post(`http://${domain}/info/update`, formData, { withCredentials: true })
                     .then((res) => {
-                        console.log(res);
                         cancelUpdate();
                         setRenderTrigger(!renderTrigger);
                     })

@@ -53,7 +53,6 @@ function CustomerRecovery() {
                 axios
                     .post(`http://${domain}/newPassword`, formData)
                     .then((res) => {
-                        console.log(res);
                         navigate('/');
                     })
                     .catch((error) => console.log(error));

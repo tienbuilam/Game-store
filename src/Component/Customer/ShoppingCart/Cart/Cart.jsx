@@ -131,7 +131,6 @@ const Card = (props) => {
             axios
                 .post(`http://${domain}/removeFromWishlist`, formData, { withCredentials: true })
                 .then((res) => {
-                    console.log(res);
                     setRender(!render);
                 })
                 .catch((err) => console.log(err));
@@ -344,7 +343,6 @@ const Cart = (props) => {
         axios
             .post(`http://${domain}/buyGame`, formData, { withCredentials: true })
             .then((res) => {
-                console.log(res);
                 if (res.data.OutStatus === '0' || res.data.OutDeleted === '1' || res.data.OutNotEnough === '1')
                     setshowpopup4(true);
                 else {

@@ -43,7 +43,6 @@ const CustomerMenu = () => {
         axios
             .get(`http://${domain}/logout`, { withCredentials: true })
             .then((res) => {
-                console.log(res);
                 deleteCustomerCookie();
                 navigate('/');
             })
