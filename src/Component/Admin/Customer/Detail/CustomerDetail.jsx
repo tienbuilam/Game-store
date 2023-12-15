@@ -224,7 +224,6 @@ function CustomerDetail() {
             axios
                 .post(`http://${domain}/admin/customer/detail/update`, formData)
                 .then((res) => {
-                    console.log(res);
                     cancelUpdate();
                     setRenderTrigger(!renderTrigger);
                 })
@@ -240,7 +239,6 @@ function CustomerDetail() {
         axios
             .post(`http://${domain}/admin/customer/delete`, formData)
             .then((res) => {
-                console.log(res);
                 navigate(-1);
             })
             .catch((error) => console.log(error));

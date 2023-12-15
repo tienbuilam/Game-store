@@ -277,7 +277,6 @@ function GameList() {
         axios
             .post(`http://${domain}/admin/game/delete`, formData)
             .then((res) => {
-                console.log(res);
                 toggleCheckboxes();
                 setRenderTrigger(!renderTrigger);
             })
@@ -295,7 +294,6 @@ function GameList() {
         axios
             .post(`http://${domain}/admin/game/activate`, formData)
             .then((res) => {
-                console.log(res);
                 toggleCheckboxes();
                 setRenderTrigger(!renderTrigger);
             })
@@ -313,7 +311,6 @@ function GameList() {
         axios
             .post(`http://${domain}/admin/game/deactivate`, formData)
             .then((res) => {
-                console.log(res);
                 toggleCheckboxes();
                 setRenderTrigger(!renderTrigger);
             })

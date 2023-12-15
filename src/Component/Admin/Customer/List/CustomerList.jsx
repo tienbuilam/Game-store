@@ -181,7 +181,6 @@ function CustomerList() {
         axios
             .post(`http://${domain}/admin/customer/delete`, formData)
             .then((res) => {
-                console.log(res);
                 toggleDelete();
                 setRenderTrigger(!renderTrigger);
             })

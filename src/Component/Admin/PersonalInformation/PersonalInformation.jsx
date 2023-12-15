@@ -192,7 +192,6 @@ function AdminPersonalInfo() {
             axios
                 .post(`http://${domain}/admin/info/edit`, formData, { withCredentials: true })
                 .then((res) => {
-                    console.log(res);
                     cancelUpdate();
                     setRenderTrigger(!renderTrigger);
                 })

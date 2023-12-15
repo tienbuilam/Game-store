@@ -107,7 +107,6 @@ function AdminGameDetail() {
         axios
             .post(`http://${domain}/admin/game/delete`, formData)
             .then((res) => {
-                console.log(res);
                 navigate(-1);
             })
             .catch((error) => console.log(error));
@@ -127,7 +126,6 @@ function AdminGameDetail() {
         axios
             .post(`http://${domain}/admin/game/activate`, formData)
             .then((res) => {
-                console.log(res);
                 setRender(!render);
             })
             .catch((error) => console.log(error));
@@ -139,7 +137,6 @@ function AdminGameDetail() {
         axios
             .post(`http://${domain}/admin/game/deactivate`, formData)
             .then((res) => {
-                console.log(res);
                 setRender(!render);
             })
             .catch((error) => console.log(error));
