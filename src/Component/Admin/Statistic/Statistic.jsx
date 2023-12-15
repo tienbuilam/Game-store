@@ -552,7 +552,7 @@ const Statistic = () => {
         <div className="w-100 h-100 d-flex flex-column align-items-center" ref={div}>
             <div className="w-100 d-flex align-items-center justify-content-center">
                 <div className={`d-flex align-items-center justify-content-center ${styles.title}`}>
-                    <h2 className="d-flex align-items-center" style={{ color: 'red' }}>
+                    <h2 className="d-flex align-items-center" style={{ color: '#1c60c7' }}>
                         Statistics
                     </h2>
                 </div>
