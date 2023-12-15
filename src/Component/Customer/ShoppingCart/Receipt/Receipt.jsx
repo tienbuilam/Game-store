@@ -1,6 +1,7 @@
 import styles from './Receipt.module.css';
 import axios from 'axios';
 import ReactDOM from 'react-dom/client';
+import blank from '../../../General/images/blank.jpg';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { domain } from '../../../General/tools/domain';
@@ -49,11 +50,7 @@ const Game = (props) => {
                     alt=""
                     onClick={() => props.Navigate(`/games/${props.id}`)}
                     className={`w-100 ${styles.imgs} mx-auto rounded`}
-                    src={
-                        props.img === null
-                            ? 'https://upload.wikimedia.org/wikipedia/commons/7/71/Nothing_whitespace_blank.png'
-                            : `http://${domain}/model/data/games/${props.img}`
-                    }
+                    src={props.img === null ? blank : `http://${domain}/model/data/games/${props.img}`}
                 ></img>
             </div>
             <div className="col-12 col-md-7 d-flex flex-column">
